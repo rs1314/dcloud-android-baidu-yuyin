@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title></title>
+	<link href="css/mui.min.css" rel="stylesheet"/>
+	<script type="text/javascript" src="./js/chaobi_baidu.js"></script>
+	<script type="text/javascript">
+		function onstart() {
+            plus.chaobi_baiduyuyin.kplbaidu_chaobi_yuyin('1', function( result ) {
+                         document.getElementById("kpl_result"). innerHTML =           result;
+                   },
+                   function(result){
+
+                   }
+            );
+        }
+
+        function onDestory() {
+            plus.chaobi_baiduyuyin.kplbaidu_chaobi_yuyin_ondestory('1', function( result ) {
+
+                   },
+                   function(result){
+
+                   }
+            );
+        }
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/audio.css"/>
+	<style type="text/css">
+    	.fiexed-buttom{
+    		position: fixed;
+    		bottom: 30px;
+    		left: 15px;
+    		right: 15px;
+    	}
+    </style>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav">
+	<h1 class="mui-title">录音</h1>
+	<div id="kpl_result"></div>
+</header>
+<div class="mui-content">
+
+	<p class="texts" style="color:green;font-size:30px;" ></p>
+
+	<div class="fiexed-buttom">
+		<button id="recorder" type="button" onmousedown="down()"  class="mui-btn mui-btn-blue mui-btn-block">录制语音</button>
+		<button id="recorder1" type="button"  onmouseup="up()" class="mui-btn mui-btn-blue mui-btn-block">停止语音得到数据</button>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+
+function down() {
+	   onstart();
+}
+
+function up() {
+	 onDestory();
+}
+
+
+</script>
+</body>
+</html>

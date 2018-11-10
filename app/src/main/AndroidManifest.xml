@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="kpl.qianzhanggui.com.chaobi_baiduyuyin">
+    <!--百度语音权限-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
+    <!--个推的权限-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!--  <uses-permission android:name="getui.permission.GetuiService.$你的APK包名"/>
+      <permission android:name="getui.permission.GetuiService.$你的APK包名" android:protectionLevel="normal"/> -->
+    <uses-permission android:name="getui.permission.GetuiService.kpl.qianzhanggui.com.chaobi_baiduyuyin" />
+    <permission
+        android:name="getui.permission.GetuiService.kpl.qianzhanggui.com.chaobi_baiduyuyin"
+        android:protectionLevel="normal" />
+
+    <!--友盟统计-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+
+    <application
+        android:name="io.dcloud.application.DCloudApplication"
+        android:allowClearUserData="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:largeHeap="true">
+        <activity
+            android:name="io.dcloud.PandoraEntry"
+            android:configChanges="orientation|keyboardHidden|keyboard|navigation"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="user"
+            android:theme="@style/TranslucentTheme"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <service
+            android:name="com.baidu.speech.VoiceRecognitionService"
+            android:exported="false" />
+
+        <!--百度语音配置这是kpl-->
+        <!--<meta-data-->
+        <!--android:name="com.baidu.speech.APP_ID"-->
+        <!--android:value="14627638"/>-->
+        <!--<meta-data-->
+        <!--android:name="com.baidu.speech.API_KEY"-->
+        <!--android:value="2IgNR32SHexObGG0FFjY3Nbt"/>-->
+        <!--<meta-data-->
+        <!--android:name="com.baidu.speech.SECRET_KEY"-->
+        <!--android:value="FbAtVBUApbKSDVhLRB9gHreU6jiRTpWf"/>-->
+
+        <!--百度语音配置这是我的-->
+        <meta-data
+            android:name="com.baidu.speech.APP_ID"
+            android:value="14634565" />
+        <meta-data
+            android:name="com.baidu.speech.API_KEY"
+            android:value="1e7lGDUMrpjZqdCMT4CWGnLx" />
+        <meta-data
+            android:name="com.baidu.speech.SECRET_KEY"
+            android:value="c9MZm5SvC5xScC5H34Mh6zmd7OCsGzva" />
+
+        <!--个推的设置-->
+        <meta-data android:name="PUSH_APPID" android:value="d3A8emCOQx7putqksq44X4"/>
+        <meta-data android:name="PUSH_APPKEY" android:value="o9L6JXPafH7sz4wVNfoXK6"/>
+        <meta-data android:name="PUSH_APPSECRET" android:value="3UbOOmCzm47oA4eYp72I02"/>
+        <service
+            android:name="com.igexin.sdk.PushService"
+            android:exported="true"
+            android:label="NotificationCenter"
+            android:process=":pushservice">
+            <intent-filter>
+                <action android:name="com.igexin.sdk.action.service.message"/>
+            </intent-filter>
+        </service>
+        <receiver android:name="com.igexin.sdk.PushReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.intent.action.USER_PRESENT"/>
+                <action android:name="com.igexin.sdk.action.refreshls"/>
+                <action android:name="android.intent.action.MEDIA_MOUNTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <activity
+            android:name="com.igexin.sdk.PushActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:process=":pushservice"
+            android:taskAffinity="com.igexin.sdk.PushActivityTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity
+            android:name="com.igexin.sdk.GActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:process=":pushservice"
+            android:taskAffinity="com.igexin.sdk.PushActivityTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <receiver android:name="io.dcloud.feature.apsGt.GTNotificationReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="kpl.qianzhanggui.com.chaobi_baiduyuyin.__CREATE_NOTIFICATION"/>
+                <action android:name="kpl.qianzhanggui.com.chaobi_baiduyuyin.__REMOVE_NOTIFICATION"/>
+                <action android:name="kpl.qianzhanggui.com.chaobi_baiduyuyin.__CLEAR_NOTIFICATION"/>
+                <action android:name="kpl.qianzhanggui.com.chaobi_baiduyuyin.__CLILK_NOTIFICATION"/>
+                <!--<action android:name="填写APK的包名.__CREATE_NOTIFICATION"/>
+                <action android:name="填写APK的包名.__REMOVE_NOTIFICATION"/>
+                <action android:name="填写APK的包名.__CLEAR_NOTIFICATION"/>
+                <action android:name="填写APK的包名.__CLILK_NOTIFICATION"/>-->
+            </intent-filter>
+        </receiver>
+        <service
+            android:name="io.dcloud.feature.apsGt.GTNormalIntentService"/>
+        <service
+            android:name="io.dcloud.feature.apsGt.GTNormalPushService"
+            android:exported="true"
+            android:label="PushService"
+            android:process=":pushservice">
+        </service>
+        <!--友盟-->
+        <meta-data android:value="5b92697ff29d987ae600035d" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="xiaomi" android:name="UMENG_CHANNEL"/>
+
+
+    </application>
+
+
+</manifest>

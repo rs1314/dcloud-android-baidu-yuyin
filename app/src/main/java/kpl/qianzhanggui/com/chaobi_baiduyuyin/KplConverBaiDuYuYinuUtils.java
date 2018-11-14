@@ -45,9 +45,19 @@ public class KplConverBaiDuYuYinuUtils extends StandardFeature {
         Log.e("onstart", InitBaidu.baiduKpl + "");
 
         if(temp==0){
-            MessageStatusRecogListener.pWebview =pWebview;
+			boolean checkPermission = CheckPermission.initPermission(pWebview.getActivity());
+			if(checkPermission){
+				MessageStatusRecogListener.pWebview =pWebview;
             MessageStatusRecogListener.array = array;
             InitBaidu.baiduKpl.start(pWebview.getContext());
+			}else{
+				String CallBackID = array.optString(0);
+                JSONArray newArray = new JSONArray();
+                newArray.put("-222222222222222222222");
+                // 调用方法将原生代码的执行结果返回给js层并触发相应的JS层回调函数
+                JSUtil.execCallback(pWebview, CallBackID, newArray, JSUtil.OK, false);
+			}
+            
 
           //  Thread resultThread = new Thread(new ResultSendThread(pWebview,array));
            // resultThread.start();
